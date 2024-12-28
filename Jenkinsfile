@@ -55,9 +55,9 @@ pipeline {
                     docker container stop backend-app || echo "No existing Backend container"
                     docker container stop frontend-app || echo "No existing Frontend container"
 
-                    docker run -d --rm --name backend-app --network dev -p 8084:8080 ${BACKEND_IMAGE}:${DOCKER_TAG}
+                    docker run -d --rm --name backend-app --network dev -p 8081:8081 ${BACKEND_IMAGE}:${DOCKER_TAG}
 
-                    docker run -d --rm --name frontend-app --network dev -p 3000:80 ${FRONTEND_IMAGE}:${DOCKER_TAG}
+                    docker run -d --rm --name frontend-app --network dev -p 5173:5173 ${FRONTEND_IMAGE}:${DOCKER_TAG}
                     """
                 }
             }
