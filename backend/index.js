@@ -7,7 +7,7 @@ app.use(express.json())
 app.use(cors())
 
 const PORT = process.env.PORT || 8081;
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/mydatabase';
+const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://nguyenvothanhhuy2002:R0BnfVRCE2eUA69n@cluster0.qzkol.mongodb.net/mydatabase';
 
 const productSchema = new mongoose.Schema({
     name: String,
