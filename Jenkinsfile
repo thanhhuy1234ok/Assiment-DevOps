@@ -21,8 +21,6 @@ pipeline {
             steps {
                 dir('backend') {
                     script {
-                        sh 'ls -la' 
-                        echo "${BACKEND_IMAGE}:1.0.0"
                         docker.build("${BACKEND_IMAGE}:1.0.0")
                     }
                 }
@@ -33,8 +31,6 @@ pipeline {
             steps {
                 dir('frontend') {
                     script {
-                        sh 'ls -la' 
-                        echo "${FRONTEND_IMAGE}:1.0.0"
                         docker.build("${FRONTEND_IMAGE}:1.0.0")
                     }
                 }
@@ -52,11 +48,20 @@ pipeline {
             }
         }
 
-        stage('Deploy Services') {
+      stage('Deploy Backend and Frontend') {
             steps {
-                sh 'docker-compose up -d'
+                script {
+                    sh """
+                    docker container stop backend-app || echo "No existing Backend container"
+                    docker container stop frontend-app || echo "No existing Frontend container"
+
+                    docker run -d --rm --name backend-app --network dev -p 8084:8080 ${BACKEND_IMAGE}:${DOCKER_TAG}
+
+                    docker run -d --rm --name frontend-app --network dev -p 3000:80 ${FRONTEND_IMAGE}:${DOCKER_TAG}
+                    """
+                }
             }
-        } 
+        }
     }
         post { 
         always {
