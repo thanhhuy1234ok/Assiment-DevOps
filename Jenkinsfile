@@ -20,6 +20,7 @@ pipeline {
             steps {
                 dir('backend') {
                     script {
+                        echo "${BACKEND_IMAGE}:1.0.0"
                         docker.build("${BACKEND_IMAGE}:1.0.0")
                     }
                 }
@@ -30,6 +31,7 @@ pipeline {
             steps {
                 dir('frontend') {
                     script {
+                         echo "${FRONTEND_IMAGE}:1.0.0"
                         docker.build("${FRONTEND_IMAGE}:1.0.0")
                     }
                 }
