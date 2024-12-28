@@ -7,6 +7,7 @@ pipeline {
         FRONTEND_IMAGE = "${DOCKER_REGISTRY}/frontend-app"
         TELEGRAM_BOT_TOKEN = '6491846812:AAFEEkxM3JWVEtjMJQzB_RdJztPwT5W_9I0'
         TELEGRAM_CHAT_ID = '-4027852461'
+        DOCKER_TAG = '1.0.0'
     }
 
     stages {
@@ -21,7 +22,7 @@ pipeline {
             steps {
                 dir('backend') {
                     script {
-                        docker.build("${BACKEND_IMAGE}:1.0.0")
+                        docker.build("${BACKEND_IMAGE}:${DOCKER_TAG}")
                     }
                 }
             }
@@ -31,7 +32,7 @@ pipeline {
             steps {
                 dir('frontend') {
                     script {
-                        docker.build("${FRONTEND_IMAGE}:1.0.0")
+                        docker.build("${FRONTEND_IMAGE}:${DOCKER_TAG}")
                     }
                 }
             }
@@ -41,8 +42,8 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-credentials') {
-                        docker.image("${BACKEND_IMAGE}:1.0.0").push()
-                        docker.image("${FRONTEND_IMAGE}:1.0.0").push()
+                        docker.image("${BACKEND_IMAGE}:${DOCKER_TAG}").push()
+                        docker.image("${FRONTEND_IMAGE}:${DOCKER_TAG}").push()
                     }
                 }
             }
