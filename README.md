@@ -233,7 +233,6 @@ volumes:
            }
        }
    }
-
    def sendTelegramMessage(String message) {
        sh """
        curl -s -X POST https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage \
