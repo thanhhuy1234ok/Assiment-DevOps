@@ -11,8 +11,9 @@ pipeline {
 
     stages {
         stage('Clone Repository') {
-            steps {
+             steps {
                 git branch: 'main', url: 'https://github.com/thanhhuy1234ok/Assiment-DevOps.git'
+                sh 'ls -R'
             }
         }
 
@@ -20,6 +21,7 @@ pipeline {
             steps {
                 dir('backend') {
                     script {
+                        sh 'ls -la' 
                         echo "${BACKEND_IMAGE}:1.0.0"
                         docker.build("${BACKEND_IMAGE}:1.0.0")
                     }
@@ -31,7 +33,8 @@ pipeline {
             steps {
                 dir('frontend') {
                     script {
-                         echo "${FRONTEND_IMAGE}:1.0.0"
+                        sh 'ls -la' 
+                        echo "${FRONTEND_IMAGE}:1.0.0"
                         docker.build("${FRONTEND_IMAGE}:1.0.0")
                     }
                 }
