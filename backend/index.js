@@ -6,7 +6,7 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8081;
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/mydatabase';
 
 const productSchema = new mongoose.Schema({
@@ -40,6 +40,14 @@ app.get('/api/v1/products/:id', (req, res) => {
         res.json(product)
     })
 })
+
+
+app.delete('/api/v1/products/:id', (req, res) => {
+    ProductModel.findByIdAndDelete(req.params.id).then(() => {
+        res.send('Product deleted')
+    })
+})
+
 app.listen(
     PORT,
     () => console.log(`Server is running on port ${PORT}`)

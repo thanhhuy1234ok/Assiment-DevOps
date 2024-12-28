@@ -17,7 +17,7 @@ const ShowProduct = () =>{
     const [products, setProducts] = useState([])
 
     const fetchProducts = () =>{
-      const data = axios.get('http://localhost:8080/api/v1/products')
+      const data = axios.get('http://localhost:8081/api/v1/products')
       console.log(data);
       return data
     }
@@ -26,7 +26,10 @@ const ShowProduct = () =>{
             setProducts(response.data)
         })
     }, [])
-
+const handleDelete = (id) =>{
+  axios.delete(`http://localhost:8081/api/v1/products/${id}`)
+  window.location.reload()
+}
     return(
       <div>
         <h1>Products</h1>
@@ -38,6 +41,7 @@ const ShowProduct = () =>{
                   <div key={product._id}>
                     <h2>Name product: {product.name}</h2>
                     <p>Price: {product.price}</p>
+                    <button onClick={() => handleDelete(product._id)}>Delete</button>
                   </div>
                 ))
               }   
@@ -54,7 +58,7 @@ const AddProduct = () =>{
   const [name, setName] = useState('')
   const [price, setPrice] = useState(0)
   const addProduct = () =>{
-    axios.post('http://localhost:8080/api/v1/products', {
+    axios.post('http://localhost:8081/api/v1/products', {
       name: name,
       price: price
     })
