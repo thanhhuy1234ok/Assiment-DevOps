@@ -14,7 +14,6 @@ pipeline {
         stage('Clone Repository') {
              steps {
                 git branch: 'main', url: 'https://github.com/thanhhuy1234ok/Assiment-DevOps.git'
-                sh 'ls -R'
             }
         }
 
