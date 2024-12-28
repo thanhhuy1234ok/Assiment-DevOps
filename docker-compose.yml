@@ -7,10 +7,10 @@ services:
       dockerfile: Dockerfile
     container_name: express-backend
     ports:
-      - "8080:8080"
+      - "8081:8081"
     environment:
       - MONGO_URI=mongodb://mongo:27017/mydatabase
-      - PORT=8080
+      - PORT=8081
     depends_on:
       - mongo
 
