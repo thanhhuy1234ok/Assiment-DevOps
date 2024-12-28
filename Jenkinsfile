@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_REGISTRY = 'thanhhuy1234ok/lap2-devops-jenkins'
+        DOCKER_REGISTRY = 'thanhhuy1234ok'
         BACKEND_IMAGE = "${DOCKER_REGISTRY}/backend-app"
         FRONTEND_IMAGE = "${DOCKER_REGISTRY}/frontend-app"
         TELEGRAM_BOT_TOKEN = '6491846812:AAFEEkxM3JWVEtjMJQzB_RdJztPwT5W_9I0'
