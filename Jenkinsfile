@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = 'thanhhuy1234ok/lap2-devops-jenkins'
         BACKEND_IMAGE = "${DOCKER_REGISTRY}/backend-app"
-    FRONTEND_IMAGE = "${DOCKER_REGISTRY}/frontend-app"
+        FRONTEND_IMAGE = "${DOCKER_REGISTRY}/frontend-app"
         TELEGRAM_BOT_TOKEN = '6491846812:AAFEEkxM3JWVEtjMJQzB_RdJztPwT5W_9I0'
         TELEGRAM_CHAT_ID = '-4027852461'
     }
@@ -20,7 +20,7 @@ pipeline {
             steps {
                 dir('backend') {
                     script {
-                        docker.build("${BACKEND_IMAGE}:latest")
+                        docker.build("${BACKEND_IMAGE}:1.0.0")
                     }
                 }
             }
@@ -30,7 +30,7 @@ pipeline {
             steps {
                 dir('frontend') {
                     script {
-                        docker.build("${FRONTEND_IMAGE}:latest")
+                        docker.build("${FRONTEND_IMAGE}:1.0.0")
                     }
                 }
             }
